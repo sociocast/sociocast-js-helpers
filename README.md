@@ -11,6 +11,16 @@ Make sure to replace the src below with your relative path to the Sociocast Java
 
     <script type="text/javascript" src="/sociocast.helper.js" />
 
-## Usage
-### This is an H3
+## Examples
+### Observe All Click Events
+The `setObserveAllClickTitles` function allows you to send entity observations for all click events that occur on the page. 
+
+### Get All Meta Tags
+The `getMetaTags` gets all the Meta Tags on the page associated with a particualr set of attributes. 
+
+### Observe Search Event
+The `setObserveSearchSubmit` function alows you to send entity observation when a user runs a search. However, given that AJAX calls may be cancelled when the user navigates away from the page, we suggest that you add regular entity observe tracking to the search results page.  
+
+### Observe MouseOver Dwell
+The `setObserveMouseDwellOnDOMObject` function allows you to send an entity observe event when a user dwells on a DOM object for some period of time. This is useful for understanding the preferences of a user or what they have been reading, for instance. 
 
