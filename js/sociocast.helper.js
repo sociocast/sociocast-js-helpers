@@ -33,28 +33,78 @@ var sociocast.helper = {
     },
     /*
     	This function captures the Meta Tag values associated
-    	with the attribute and attribute values (array). 
+    	with the attribute and attribute values (array). This function
+    	returns a JavaScript map. 
     */
     getMetaTags: function (metaAttribute, metaAttributeValuesArray) {
-        // do something
-        return null;
+		var returnMap = {};
+		$("meta").each(function(){
+		    var metaName = jQuery(this).attr(metaAttribute);
+		    var metaValue = jQuery(this).attr("content");
+		    if($.inArray(metaName, metaAttributeValuesArray) > -1){
+		        returnMap[metaName] = metaValue;  
+	    	}
+	    });        
+        return returnMap;
     },
     /*
     	This function captures a search on submit. All you need to do 
     	is pass in the ID or Class of the Form as a String. 
+    	
+    	entityID - the entity ID
+    	eventType - the event type you want to use (i.e. "search")
+    	searchTextKey - the key for the search text you want to use (i.e. "search-text")
+    	searchObjectIdentifier - the identifier for the search form
+    	textObjectIdentifier - the identifier for the search input text
+    	additionalAttribs - additional attributes you want to add to entity observation
     */
-    setObserveSearchSubmit: function (eventType, objectIdentifier) {
-        // do something
+    setObserveSearchSubmit: function (entityID, 
+    		eventType, 
+    		searchTextKey, 
+	    	searchObjectIdentifier, 
+    		textObjectIdentifier,
+	    	additionalAttribs) {
+	    	
+		var searchAttribs;
+    	if(additionalAttribs != null) searchAttribs = additionalAttribs;
+    	else searchAttribs = {};
+		$(searchObjectIdentifier).click(function(){
+			var searchText = $(textObjectIdentifier).val();
+			searchAttribs[searchTextKey] = searchText;
+			sociocast.entity_observe(eventType, entityID, searchAttribs);   
+		});
     },
     /*
     	This function sends an entity observation to Sociocast when 
 		the user dwells on a particular object on the page. 
 		
+		entityID - the entity ID 
 		eventType - the event type 
 		objectIdentifier - the identifier for the object for jQuery
 		dwellTimeMillis - the minimum dwell time for which the event should be triggered
+		additionalAttribs - additional attributes you want to add to entity observation
     */
-    setObserveMouseDwellOnDOMObject: function (eventType, objectIdentifier, dwellTimeMillis) {
+    setObserveMouseDwellOnDOMObject: function (entityID,
+    		eventType, 
+    		objectIdentifier, 
+    		dwellTimeMillis, 
+    		additionalAttribs) {
         // do something
+   		$(objectIdentifier).hover(
+        	function() {
+            	$(this).data("hoverStart", (new Date()).getTime());
+	        }, 
+    	    function() {
+    	    	// Calculate hover time
+    	    	var hoverAttribs;
+    	    	if(additionalAttribs != null) hoverAttribs = additionalAttribs;
+    	    	else hoverAttribs = {};
+        	    var hoverTime = ((new Date()).getTime() - $(this).data("hoverStart"));
+        	    hoverAttribs.hover_time = hoverTime;
+				if(hoverTime >= dwellTimeMillis) {
+					sociocast.entity_observe(eventType, entityID, hoverAttribs);   	
+				}            	
+        	}
+	    );        
     }  
 }
