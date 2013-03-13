@@ -11,7 +11,7 @@ Make sure to replace the src below with your relative path to the Sociocast Java
 
     <script type="text/javascript" src="/sociocast.helper.js" />
 
-## Examples
+## Methods
 ### Observe All Click Events
 The `setObserveAllClickTitles` function allows you to send entity observations for all click events that occur on the page. 
 
