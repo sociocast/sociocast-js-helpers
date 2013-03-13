@@ -1,4 +1,4 @@
-sociocast-js-helpers
+# Sociocast JavaScript Helper Library 
 ====================
 
-Sociocast JavaScript Utilities &amp; How To's
+
