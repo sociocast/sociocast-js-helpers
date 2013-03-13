@@ -11,3 +11,6 @@ Make sure to replace the src below with your relative path to the Sociocast Java
 
     <script type="text/javascript" src="/sociocast.helper.js" />
 
+## Usage
+### This is an H3
+
