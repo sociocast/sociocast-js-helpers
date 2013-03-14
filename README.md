@@ -1,3 +1,5 @@
+![Alt text](/images/logo.png)
+
 # Sociocast JavaScript Helper Library 
 
 The Sociocast JavaScript Helper Library provides general utilities for clients using the Sociocast JavaScript Library. In order to use library, you must have: 
