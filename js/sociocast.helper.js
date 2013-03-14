@@ -4,8 +4,20 @@
 	those two libraries. 
 */
 
-var sociocast.helper = {
-	
+var sociocast_helper = {
+			
+	/*
+		Gets the current page title as a String. 
+	*/
+	getPageTitle: function () {
+		return $("title").text();	
+	},	
+	/*
+		Gets the current file path of the URL
+	*/
+	getPath : function() {
+		return $(location).attr('pathname');
+	},
 	/*
 		This function captures all click events and submits
 		the entity observation to Sociocast. Keep in mind that
@@ -14,14 +26,14 @@ var sociocast.helper = {
 		this is to check on the target page whether there is a 
 		document.referrer and then submit a click event. 
 	*/
-    setObserveAllClickTitles:  function (eventType) {
+    setObserveAllClickTitles: function (entityID, eventType) {
         // Loop through each <a> tag
         $("a").each(function(){
 			// Set the onClick function
 			$(this).click(function(){
 				var linkAttribs = {};
 				var linkText = $(this).text();
-				var linkTitle = $(this).html();
+				var linkTitle = $(this).html();			
 				if(linkTitle != "") linkAttribs.link_text = linkText;
 				if(linkTitle != "") linkAttribs.link_title = linkTitle;        
 				if(linkTitle != "" | linkText != "") {
@@ -30,6 +42,21 @@ var sociocast.helper = {
 				}		
 			});
 		});
+    },
+    /*
+    	As oppose to the function above, this function sends a click event on the
+    	page in which it lands. This avoids the problem with AJAX calls being 
+    	cancelled on navigation. 
+    */
+    setObservePassiveClick: function(entityID, eventType, additionalAttribs) {
+    	if(document.referrer) { // Click occured
+			// Send the entity observation to Sociocast
+			var url = document.referrer; 
+		   	var ref = url.match(/:\/\/(.[^/]+)/)[1];	
+		   	if(additionalAttribs == null) additionalAttribs = {};
+		   	additionalAttribs.source = ref;
+			sociocast.entity_observe(eventType, entityID, additionalAttribs);    			
+    	}
     },
     /*
     	This function captures the Meta Tag values associated
@@ -103,7 +130,7 @@ var sociocast.helper = {
         	    hoverAttribs.hover_time = hoverTime;
 				if(hoverTime >= dwellTimeMillis) {
 					sociocast.entity_observe(eventType, entityID, hoverAttribs);   	
-				}            	
+				}  
         	}
 	    );        
     }  
