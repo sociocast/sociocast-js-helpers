@@ -12,7 +12,27 @@ Make sure to replace the src below with your relative path to the Sociocast Java
     <script type="text/javascript" src="/sociocast.helper.js" />
 
 ## Methods
-### Observe All Click Events
+
+### Get Page Title
+Th2 `getPageTitle` helper function grabs the current Title of the page. This allows you to quickly add the variable to event observation attributes. 
+
+     var pageTitle = sociocast.helper.getPageTitle();
+
+### Get Path
+The `getPath` helper function grabs the current path of the page. This allows you to quickly add the variable to event observation attributes.  
+
+    var pagePath = sociocast.helper.getPath();
+
+### Observe All Passive Click Events
+The `setObservePassiveClick` function allows you to track click events after the user navigates to the clicked page. This prevents the AJAX from being cancelled as is possible with the `setObserveAllClickTitles` function. 
+
+    var attribs = {};			
+    attribs.page_title = sociocast_helper.getPageTitle();
+    attribs.path_name = sociocast_helper.getPath();
+			
+    sociocast_helper.setObservePassiveClick(entityID, "click", attribs);
+
+### Observe All Active Click Events
 The `setObserveAllClickTitles` function allows you to send entity observations for all click events that occur on the page. For example to send an entity observe event with event type click, use the following:
 
      sociocast.helper.setObserveAllClickTitles("click");
