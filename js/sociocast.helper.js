@@ -4,8 +4,7 @@
 	those two libraries. 
 */
 
-var sociocast_helper = {
-			
+var sociocast_helper = {			
 	/*
 		Gets the current page title as a String. 
 	*/
