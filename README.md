@@ -7,8 +7,10 @@ The Sociocast JavaScript Helper Library provides general utilities for clients u
 * Installed [jQuery](http://www.jquery.com) 
 * Installed and initialized the [Sociocast JavaScript Library](http://www.sociocast.com/dev-center/javascript-integration/)
 
+This library should be downloaded and installed on your servers. 
+
 ## Usage
-Make sure to replace the src below with your relative path to the Sociocast Javascript Library:
+Make sure to replace the src below with your relative path to the Sociocast Javascript Helper Library on your servers:
 
     <script type="text/javascript" src="/sociocast.helper.js" />
 
