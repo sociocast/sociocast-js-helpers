@@ -133,4 +133,61 @@ var sociocast_helper = {
         	}
 	    );        
     }  
+    /*
+    	The next set of functions are to help clients utilize external integrations
+    	with 3rd part platforms. 
+    */
+    /*
+    	This function allows clients who are using Optimizely to add a Sociocast 
+    	entity to an Optimizely segment for segment targeting purposes.
+
+    	entityID - the entity ID 
+    	attributeKey - the logical attribute key to look for in the entity observation (i.e. clusid)
+    		in order to add entity to Optimizely segment
+    	attributeValue - the value of the attributeKey to look for, in order to add entity
+    		to Optimizely segment 
+    	optimizelySegmentName - the name of the Optimizely segment you defined within Optimizely
+    */
+    Optimizely_addEntityToSegment: function(entityID,
+    		attributeKey,
+    		attributeValue,
+    		optimizelySegmentName) {
+    	// Check for Optimizely
+    	if(window['optimizely'] != null) {
+    		// Get entity's profile
+			sociocast.entity_profile(entityID, true,
+				{
+					"attributes":[attributeKey]
+				},
+				{
+					success : function(data) {
+						var json = jQuery.parseJSON(data);
+						if(json.attributes[attributeKey] != null) {
+							var values = json.attributes[attributeKey];
+							if (jQuery.inArray(attributeValue, values) > -1){
+								window['optimizely'].push(['addToSegment', optimizelySegmentName, new Date()]);
+								
+							}				
+						}			
+					}
+				}
+			);
+
+		}
+    }
+
+    /*
+    	This function removes the entity from the Optimizely segment. 
+
+		entityID - the entity ID 
+		optimizelySegmentName - the name of the Optimizely segment you defined within Optimizely
+
+    */
+    Optimizely_removeEntityFromSegment: function(entityID,
+    		optimizelySegmentName) {    
+    	    	// Check for Optimizely
+    	if(window['optimizely'] != null) {
+    		window['optimizely'].push(['removeFromSegment', optimizelySegmentName]);	
+    	}
+    }
 }
