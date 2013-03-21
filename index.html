@@ -145,6 +145,29 @@ var metaMap = sociocast.helper.getMetaTags("name", metaAttributeValuesArray);
         2000, 
         additionalAttribs);
 </code></pre>
+
+<h3>Helper Functions for External Integrations</h3>
+
+<h4>Optimizely: Add and Remove an Entity to Optimizely Segment</h4>
+
+<p>
+The <code>Optimizely_addEntityToSegment</code> function allows you to Quickly add an entity to an Optimizely segment. The function checks for a particular key-value to pair to appear in entity's profile (i.e. <code>clusid</code>). The function takes in <code>optimizelySegmentName</code>, which is the Optimizely segment name you defined within the Optimizely dashboard. For more information on Optimizely targeting and segments <a href="https://www.optimizely.com/docs/api#visitor-segments" target="_blank">click here</a>. For instance:
+</p>
+
+<pre><code>sociocast.helper.Optimizely_addEntityToSegment(entityID,
+        attributeKey,
+        attributeValue,
+        optimizelySegmentName);
+</code></pre>
+
+This function would add the <code>entityID</code> to the Optimizely segment named <code>optimizelySegmentName</code> if the <code>'attributeKey':'attributeValue'</code> appeared in the entity's profile. This is useful for checking whether an entity is in a particular Sociocast cluster in order to provide predictive A/B testing within Optimizely.
+
+To remove an entity, you can call the <code>Optimizely_removeEntityFromSegment</code> function. For instance:
+
+<pre><code>sociocast.helper.Optimizely_removeEntityFromSegment(entityID,
+        optimizelySegmentName);
+</code></pre>
+
       </section>
       <footer>
 
