@@ -174,7 +174,7 @@ var sociocast_helper = {
 			);
 
 		}
-    }
+    },
 
     /*
     	This function removes the entity from the Optimizely segment. 
