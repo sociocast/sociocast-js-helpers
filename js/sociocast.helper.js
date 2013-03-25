@@ -132,7 +132,7 @@ var sociocast_helper = {
 				}  
         	}
 	    );        
-    }  
+    },  
     /*
     	The next set of functions are to help clients utilize external integrations
     	with 3rd part platforms. 
