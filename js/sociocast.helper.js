@@ -9,13 +9,13 @@ var sociocast_helper = {
 		Gets the current page title as a String. 
 	*/
 	getPageTitle: function () {
-		return $("title").text();	
+		return jQuery("title").text();	
 	},	
 	/*
 		Gets the current file path of the URL
 	*/
 	getPath : function() {
-		return $(location).attr('pathname');
+		return jQuery(location).attr('pathname');
 	},
 	/*
 		This function captures all click events and submits
@@ -27,12 +27,12 @@ var sociocast_helper = {
 	*/
     setObserveAllClickTitles: function (entityID, eventType) {
         // Loop through each <a> tag
-        $("a").each(function(){
+        jQuery("a").each(function(){
 			// Set the onClick function
-			$(this).click(function(){
+			jQuery(this).click(function(){
 				var linkAttribs = {};
-				var linkText = $(this).text();
-				var linkTitle = $(this).html();			
+				var linkText = jQuery(this).text();
+				var linkTitle = jQuery(this).html();			
 				if(linkTitle != "") linkAttribs.link_text = linkText;
 				if(linkTitle != "") linkAttribs.link_title = linkTitle;        
 				if(linkTitle != "" | linkText != "") {
@@ -64,10 +64,10 @@ var sociocast_helper = {
     */
     getMetaTags: function (metaAttribute, metaAttributeValuesArray) {
 		var returnMap = {};
-		$("meta").each(function(){
+		jQuery("meta").each(function(){
 		    var metaName = jQuery(this).attr(metaAttribute);
 		    var metaValue = jQuery(this).attr("content");
-		    if($.inArray(metaName, metaAttributeValuesArray) > -1){
+		    if(jQuery.inArray(metaName, metaAttributeValuesArray) > -1){
 		        returnMap[metaName] = metaValue;  
 	    	}
 	    });        
@@ -95,7 +95,7 @@ var sociocast_helper = {
     	if(additionalAttribs != null) searchAttribs = additionalAttribs;
     	else searchAttribs = {};
 		$(searchObjectIdentifier).click(function(){
-			var searchText = $(textObjectIdentifier).val();
+			var searchText = jQuery(textObjectIdentifier).val();
 			searchAttribs[searchTextKey] = searchText;
 			sociocast.entity_observe(eventType, entityID, searchAttribs);   
 		});
@@ -116,16 +116,16 @@ var sociocast_helper = {
     		dwellTimeMillis, 
     		additionalAttribs) {
         // do something
-   		$(objectIdentifier).hover(
+   		jQuery(objectIdentifier).hover(
         	function() {
-            	$(this).data("hoverStart", (new Date()).getTime());
+            	jQuery(this).data("hoverStart", (new Date()).getTime());
 	        }, 
     	    function() {
     	    	// Calculate hover time
     	    	var hoverAttribs;
     	    	if(additionalAttribs != null) hoverAttribs = additionalAttribs;
     	    	else hoverAttribs = {};
-        	    var hoverTime = ((new Date()).getTime() - $(this).data("hoverStart"));
+        	    var hoverTime = ((new Date()).getTime() - jQuery(this).data("hoverStart"));
         	    hoverAttribs.hover_time = hoverTime;
 				if(hoverTime >= dwellTimeMillis) {
 					sociocast.entity_observe(eventType, entityID, hoverAttribs);   	
