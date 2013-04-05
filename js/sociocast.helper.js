@@ -94,7 +94,7 @@ var sociocast_helper = {
 		var searchAttribs;
     	if(additionalAttribs != null) searchAttribs = additionalAttribs;
     	else searchAttribs = {};
-		$(searchObjectIdentifier).click(function(){
+		jQuery(searchObjectIdentifier).click(function(){
 			var searchText = jQuery(textObjectIdentifier).val();
 			searchAttribs[searchTextKey] = searchText;
 			sociocast.entity_observe(eventType, entityID, searchAttribs);   
